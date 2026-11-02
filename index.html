@@ -1,0 +1,763 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaHub | Arctic Premium</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --ice: #b8f7ff;
+    --cyan: #53eaff;
+    --blue: #439cff;
+    --purple: #9b9aff;
+    --white: #f4fdff;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 15px;
+    overflow-x: hidden;
+    background: #06131f;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* AURORA BACKGROUND */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 50% 0%, #54eaff18, transparent 55%),
+        linear-gradient(145deg, #071a2a, #071321 60%, #10162b);
+}
+
+.aurora {
+    position: absolute;
+    width: 75vw;
+    height: 60vw;
+    min-height: 400px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .18;
+    animation: auroraMove 12s ease-in-out infinite alternate;
+}
+
+.aurora.one {
+    top: -35%;
+    left: -20%;
+    background: linear-gradient(135deg, #00eaff, #368bff);
+}
+
+.aurora.two {
+    right: -25%;
+    bottom: -40%;
+    background: linear-gradient(135deg, #777cff, #00eaff);
+    animation-delay: -5s;
+}
+
+.aurora.three {
+    width: 45vw;
+    height: 45vw;
+    top: 30%;
+    left: 30%;
+    background: #00bfff;
+    opacity: .09;
+    animation-delay: -8s;
+}
+
+@keyframes auroraMove {
+    0% {
+        transform: translate(-5%, 0) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translate(10%, 8%) rotate(15deg) scale(1.2);
+    }
+    100% {
+        transform: translate(-5%, 15%) rotate(-10deg) scale(.9);
+    }
+}
+
+/* GRID */
+
+.grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(#b6f5ff08 1px, transparent 1px),
+        linear-gradient(90deg, #b6f5ff08 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+/* SNOW */
+
+#snow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.snowflake {
+    position: absolute;
+    top: -30px;
+    color: #e7fcff;
+    text-shadow: 0 0 8px #8deaff, 0 0 18px #53cfff;
+    animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translate3d(0, -5vh, 0) rotate(0);
+        opacity: 0;
+    }
+    15% { opacity: .85; }
+    50% {
+        transform: translate3d(35px, 50vh, 0) rotate(180deg);
+    }
+    100% {
+        transform: translate3d(-30px, 110vh, 0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* LIGHT PARTICLES */
+
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #a7f7ff;
+    box-shadow: 0 0 12px #58dfff;
+    animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+    from {
+        transform: translateY(105vh) translateX(0);
+        opacity: 0;
+    }
+    15% { opacity: .9; }
+    to {
+        transform: translateY(-10vh) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* MAIN */
+
+.wrapper {
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    z-index: 3;
+    animation: entrance 1s cubic-bezier(.16,1,.3,1) both;
+}
+
+@keyframes entrance {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(.93);
+        filter: blur(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* ANIMATED BORDER */
+
+.card {
+    position: relative;
+    padding: 1.5px;
+    border-radius: 29px;
+    overflow: hidden;
+    background: linear-gradient(
+        120deg,
+        #c7fbff,
+        #50dfff,
+        #777fff,
+        #ffffff,
+        #48caff,
+        #c7fbff
+    );
+    background-size: 400% 400%;
+    animation: borderFlow 7s linear infinite;
+    box-shadow:
+        0 25px 90px #0009,
+        0 0 40px #42dfff18,
+        0 0 100px #479dff10;
+}
+
+@keyframes borderFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.card-inner {
+    position: relative;
+    overflow: hidden;
+    padding: 36px 29px 26px;
+    border-radius: 28px;
+    background: linear-gradient(
+        145deg,
+        rgba(20, 53, 75, .76),
+        rgba(9, 23, 40, .78),
+        rgba(20, 35, 65, .75)
+    );
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid #d6faff18;
+}
+
+.card-inner::before {
+    content: "";
+    position: absolute;
+    top: -170px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 250px;
+    background: #52eaff;
+    filter: blur(110px);
+    opacity: .12;
+    pointer-events: none;
+}
+
+.card-inner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #ffffff08,
+        transparent
+    );
+    transform: skewX(-20deg);
+    animation: glassShine 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes glassShine {
+    0%, 65% { left: -100%; }
+    100% { left: 150%; }
+}
+
+/* TOP LABEL */
+
+.top-label {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 29px;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 17px;
+    border: 1px solid #9defff48;
+    background: linear-gradient(100deg, #64dfff16, #9d9bff16);
+    border-radius: 30px;
+    color: #d5faff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    box-shadow: 0 0 20px #62dfff0d;
+}
+
+.live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #8effed;
+    box-shadow: 0 0 12px #8effed;
+    animation: dotPulse 1.5s infinite;
+}
+
+@keyframes dotPulse {
+    50% {
+        opacity: .3;
+        transform: scale(.75);
+    }
+}
+
+/* LOGO 4 SQUARES */
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.logo {
+    width: 96px;
+    height: 96px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 7px;
+    padding: 9px;
+    border-radius: 25px;
+    border: 1px solid #c3f6ff75;
+    background: linear-gradient(145deg, #b9f8ff1c, #589dff15);
+    box-shadow:
+        0 0 35px #53dfff30,
+        inset 0 0 22px #ffffff0b;
+    animation: logoFloat 3.5s ease-in-out infinite;
+    position: relative;
+}
+
+.logo::before {
+    content: "";
+    position: absolute;
+    inset: -7px;
+    border-radius: 30px;
+    border: 1px solid #8eeaff50;
+    animation: logoRing 3s ease-in-out infinite;
+}
+
+.logo span {
+    border-radius: 8px;
+    background: linear-gradient(145deg, #ffffff, #b5f4ff 45%, #56baff);
+    box-shadow:
+        0 0 12px #70ddff85,
+        inset 0 2px 5px #ffffff;
+    animation: squarePulse 2.8s ease-in-out infinite alternate;
+}
+
+.logo span:nth-child(2) { animation-delay: .4s; }
+.logo span:nth-child(3) { animation-delay: .8s; }
+.logo span:nth-child(4) { animation-delay: 1.2s; }
+
+@keyframes squarePulse {
+    to {
+        filter: brightness(.7);
+        box-shadow: 0 0 20px #9cafff90;
+    }
+}
+
+@keyframes logoFloat {
+    50% { transform: translateY(-7px); }
+}
+
+@keyframes logoRing {
+    50% {
+        transform: scale(1.08);
+        opacity: .2;
+    }
+}
+
+/* TITLE */
+
+.title {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(25px, 7vw, 34px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(
+        100deg,
+        #ffffff,
+        #b8f7ff,
+        #6fd4ff,
+        #a6a4ff,
+        #ffffff
+    );
+    background-size: 250% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 15px #74ddff35);
+    animation: titleFlow 5s linear infinite;
+}
+
+@keyframes titleFlow {
+    to { background-position: 250% center; }
+}
+
+.subtitle {
+    margin-top: 13px;
+    color: #bad6e9;
+    font-size: 12px;
+    line-height: 1.9;
+    text-align: center;
+}
+
+.divider {
+    width: 85px;
+    height: 2px;
+    margin: 23px auto;
+    border-radius: 20px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #64eaff,
+        #aaaaff,
+        transparent
+    );
+    box-shadow: 0 0 15px #69dfff;
+    animation: dividerGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes dividerGlow {
+    to { width: 120px; opacity: .6; }
+}
+
+/* STATUS */
+
+.status {
+    width: fit-content;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 18px;
+    border-radius: 30px;
+    border: 1px solid #a1f2ff45;
+    background: linear-gradient(100deg, #60dfff16, #9c9cff16);
+    color: #d6faff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    box-shadow: 0 0 20px #62dfff10;
+}
+
+/* KEY BOX */
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 29px 0 12px;
+}
+
+.section-title span:first-child {
+    color: #e5f8ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.section-title span:last-child {
+    color: #a8efff;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.key-box {
+    position: relative;
+    padding: 17px;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid #8de9ff60;
+    background: linear-gradient(
+        120deg,
+        rgba(109, 213, 255, .13),
+        rgba(137, 151, 255, .09)
+    );
+    color: #f0fdff;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.8;
+    text-align: center;
+    word-break: break-word;
+    box-shadow: inset 0 0 25px #a5eaff0a;
+    transition: .3s;
+}
+
+.key-box:hover {
+    border-color: #d7fbff;
+    box-shadow: 0 0 25px #68dfff25;
+    background: #a4eaff18;
+}
+
+/* COPY BUTTON */
+
+.copy-btn {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 16px;
+    padding: 17px;
+    border: 1px solid #e1fbff90;
+    border-radius: 13px;
+    background: linear-gradient(
+        105deg,
+        #d7fbff,
+        #80e1ff,
+        #a8baff,
+        #d7fbff
+    );
+    background-size: 250% 100%;
+    color: #08283e;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    box-shadow:
+        0 7px 28px #62dfff30,
+        inset 0 1px 4px #ffffff;
+    transition: .3s;
+    animation: buttonFlow 5s linear infinite;
+}
+
+@keyframes buttonFlow {
+    to { background-position: 250% center; }
+}
+
+.copy-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 55%;
+    height: 100%;
+    background: #ffffff95;
+    transform: skewX(-25deg);
+    transition: .65s;
+}
+
+.copy-btn:hover::before {
+    left: 160%;
+}
+
+.copy-btn:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 12px 35px #6adfff65,
+        0 0 20px #ffffff20;
+    filter: brightness(1.08);
+}
+
+.copy-btn:active {
+    transform: scale(.97);
+}
+
+/* FOOTER */
+
+.notice {
+    min-height: 16px;
+    margin-top: 15px;
+    color: #b6d7e9;
+    text-align: center;
+    font-size: 10px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 26px;
+    padding-top: 19px;
+    border-top: 1px solid #d5f7ff20;
+    color: #a8c5d7;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.footer strong {
+    color: #c5f8ff;
+}
+
+.version {
+    color: #b7c7ed;
+}
+
+/* MOBILE */
+
+@media(max-width: 420px) {
+    .card-inner {
+        padding: 29px 21px 23px;
+    }
+
+    .logo {
+        width: 86px;
+        height: 86px;
+    }
+
+    .key-box {
+        font-size: 12px;
+    }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="grid"></div>
+    <div class="aurora one"></div>
+    <div class="aurora two"></div>
+    <div class="aurora three"></div>
+</div>
+
+<div id="snow"></div>
+<div id="particles"></div>
+
+<div class="wrapper">
+    <div class="card">
+        <div class="card-inner">
+
+            <div class="top-label">
+                <div class="label">
+                    <span class="live-dot"></span>
+                    ARCTIC PREMIUM SYSTEM
+                </div>
+            </div>
+
+            <div class="logo-container">
+                <div class="logo">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <h1 class="title">AQUAHUB</h1>
+
+            <p class="subtitle">
+                Welcome to AquaHub Key System.<br>
+                Your premium access key is ready.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="status">
+                <span class="live-dot"></span>
+                KEY AVAILABLE
+            </div>
+
+            <div class="section-title">
+                <span>YOUR ACCESS KEY</span>
+                <span>● VERIFIED</span>
+            </div>
+
+            <div class="key-box" id="key">
+                AquaHubKeyJdnslwoejh - Kalwouwbwowoeueb
+            </div>
+
+            <button class="copy-btn" onclick="copyKey()">
+                <span id="btnText">COPY KEY &nbsp; ↗</span>
+            </button>
+
+            <p class="notice" id="notice">
+                Click the button to copy your access key.
+            </p>
+
+            <div class="footer">
+                <span>POWERED BY <strong>AQUAHUB</strong></span>
+                <span class="version">VERSION 2.0</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+// SNOW EFFECT
+const snow = document.getElementById("snow");
+
+for (let i = 0; i < 90; i++) {
+    const flake = document.createElement("span");
+    flake.className = "snowflake";
+    flake.textContent = Math.random() > .65 ? "❄" : "·";
+
+    flake.style.left = Math.random() * 100 + "%";
+    flake.style.fontSize = (6 + Math.random() * 16) + "px";
+    flake.style.animationDuration = (7 + Math.random() * 13) + "s";
+    flake.style.animationDelay = (-Math.random() * 20) + "s";
+    flake.style.opacity = .3 + Math.random() * .6;
+
+    snow.appendChild(flake);
+}
+
+// FLOATING PARTICLES
+const particles = document.getElementById("particles");
+
+for (let i = 0; i < 45; i++) {
+    const p = document.createElement("span");
+    p.className = "particle";
+
+    p.style.left = Math.random() * 100 + "%";
+    p.style.animationDuration = (7 + Math.random() * 12) + "s";
+    p.style.animationDelay = (-Math.random() * 15) + "s";
+    p.style.opacity = .3 + Math.random() * .7;
+
+    particles.appendChild(p);
+}
+
+// COPY KEY
+async function copyKey() {
+    const key = document.getElementById("key").innerText.trim();
+    const btnText = document.getElementById("btnText");
+    const notice = document.getElementById("notice");
+
+    try {
+        await navigator.clipboard.writeText(key);
+    } catch (error) {
+        const area = document.createElement("textarea");
+        area.value = key;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+    }
+
+    btnText.innerHTML = "✓ KEY COPIED SUCCESSFULLY";
+    notice.innerText = "Your AquaHub key has been copied!";
+    notice.style.color = "#a9ffdd";
+
+    setTimeout(() => {
+        btnText.innerHTML = "COPY KEY &nbsp; ↗";
+        notice.innerText = "Click the button to copy your access key.";
+        notice.style.color = "#b6d7e9";
+    }, 2500);
+}
+</script>
+
+</body>
+</html>
